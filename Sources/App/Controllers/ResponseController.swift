@@ -19,10 +19,11 @@ final class ResponseController {
     private var logLevel: MockturtleLogger.Level
     private var configWatch: ConfigWatch
 
+    private let configPathResolver = ConfigPathResolver()
+
     public init() throws {
-        guard let configPath = ProcessInfo.processInfo.environment["CONFIG"] else {
-            throw Abort(.internalServerError, reason: "ENV not set: `CONFIG`")
-        }
+        let configPath = try configPathResolver.resolveConfigPath()
+
         let logLevelString = ProcessInfo.processInfo.environment["LOGLEVEL"] ?? "INFO"
         let logLevel = MockturtleLogger.Level(parameter: logLevelString) ?? .info
         self.logLevel = logLevel

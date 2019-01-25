@@ -9,4 +9,8 @@
 import App
 
 
-try app(.detect()).run()
+do {
+    try app(.detect()).run()
+} catch {
+    print("failed: \(error)")
+}

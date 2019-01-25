@@ -12,11 +12,11 @@ usage ()
 case $1 in
 	serve)
 		shift
-		./Run serve --env prod $@
+		../Run serve --env prod $@
 		;;
 	generate)
 		shift
-		./Run generateScenarioFile $@
+		../Run generateScenarioFile $@
 		break
 		;;
 	*)

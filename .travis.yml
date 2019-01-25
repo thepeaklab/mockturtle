@@ -14,6 +14,7 @@ env:
 
 install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then source ./scripts/install_swift.sh; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install openssl; fi
 
 script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then swiftlint; fi

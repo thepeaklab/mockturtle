@@ -10,6 +10,7 @@ import App
 import XCTest
 
 final class AppTests: XCTestCase {
+
     func testNothing() throws {
         // add your tests here
         XCTAssert(true)
@@ -18,4 +19,5 @@ final class AppTests: XCTestCase {
     static let allTests = [
         ("testNothing", testNothing)
     ]
+    
 }

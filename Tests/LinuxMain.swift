@@ -7,7 +7,7 @@
 
 
 import XCTest
-import MockturtleTests
+import AppTests
 
 
 var tests = [XCTestCaseEntry]()

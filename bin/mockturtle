@@ -1,0 +1,25 @@
+#!/bin/sh
+
+
+usage ()
+{
+  echo 'Usage: '
+  echo '  mockturtle serve --hostname <hostname> --port <port>'
+  echo '  mockturtle generate --folder <folder> --output-file <output-file>'
+  exit
+}
+
+case $1 in
+	serve)
+		shift
+		./Run serve --env prod $@
+		;;
+	generate)
+		shift
+		./Run generateScenarioFile $@
+		break
+		;;
+	*)
+		usage
+		;;
+esac

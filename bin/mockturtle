@@ -9,10 +9,16 @@ usage ()
   exit
 }
 
+BASEDIR=$(dirname "$0")
+LINK=$(readlink "$0")
+ABSOLUTE="$BASEDIR/$LINK"
+ABSOLUTEDIR=$(dirname "$ABSOLUTE")
+RUNPATH="$ABSOLUTEDIR/.."
+
 case $1 in
 	serve)
 		shift
-		../Run serve --env prod $@
+		$RUNPATH/Run serve --env prod $@
 		;;
 	generate)
 		shift

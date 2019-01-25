@@ -87,7 +87,10 @@ You can modify your `mock-config.yml` while the `Mockturtle` server is running. 
 
 ## Homebrew
 
-WIP
+```shell
+brew tap thepeaklab/tap
+brew install mockturtle
+```
 
 ## Start the Server
 

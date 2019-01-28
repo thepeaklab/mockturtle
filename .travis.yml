@@ -13,7 +13,7 @@ env:
   - FIXTURE_PATH_SIMPLE=./Fixtures/simple/mock-config.yml
 
 install:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then source ./scripts/install_swift.sh; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then source ./Scripts/install_swift.sh; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install openssl; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install libressl; fi
 

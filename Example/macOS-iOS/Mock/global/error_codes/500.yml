@@ -1,0 +1,8 @@
+version: "0.1.0"
+# Global result for 500 errors
+
+response:
+  code: 500
+  header:
+    Content-Type: "application/json"
+  body: >

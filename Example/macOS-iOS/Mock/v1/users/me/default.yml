@@ -1,0 +1,22 @@
+version: "0.1.0"
+# Result for default users
+
+delay:
+  from: 0
+  to: 1
+
+response:
+  code: 200
+  header:
+    Content-Type: "application/json"
+  body: >
+    [
+      {
+        "name": "Peter",
+        "age": 19
+      },
+      {
+        "name": "Hans",
+        "age": 20
+      }
+    ]

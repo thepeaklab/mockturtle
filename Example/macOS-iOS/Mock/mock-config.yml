@@ -1,0 +1,7 @@
+version: "0.1.0"
+routes:
+  - url: "/v1/auth/login"
+    method: POST
+  - url: "/v1/users/me"
+    method: GET
+  - directory: "global/error_codes"

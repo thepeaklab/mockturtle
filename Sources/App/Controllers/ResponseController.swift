@@ -124,9 +124,12 @@ fileprivate extension MockturtleConfig {
                method: HTTPMethod,
                stateIdentifier: String?) -> MockturtleRoute? {
         // check if there are global routes without url
-        for route in routes.filter({ $0.url == nil }) {
-            if route.state(for: stateIdentifier) != nil {
-                return route
+        // global routes are only valid when called with state identifier
+        if let stateIdentifier = stateIdentifier {
+            for route in routes.filter({ $0.url == nil }) {
+                if route.state(for: stateIdentifier) != nil {
+                    return route
+                }
             }
         }
 

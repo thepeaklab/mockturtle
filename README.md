@@ -6,7 +6,9 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat)](https://github.com/thepeaklab/mockturtle/blob/master/LICENSE)
 [![Twitter: @thepeaklab](https://img.shields.io/badge/contact-@thepeaklab-009fee.svg?style=flat)](https://twitter.com/thepeaklab)
 
-`Mockturtle` is an easy configurable and generic mock server based on [Vapor](https://vapor.codes).
+`Mockturtle` is an easy configurable and generic mock server based on [Vapor](https://vapor.codes). The goal of `Mockturtle` is to mock server results whereas the necessity for making source code changes (just because of the mock server) is kept to an absolute minimum.
+
+The only difference between production and test code will be the `base url` of your request (`https://api.example.com/...` vs. `http://localhost:8080/`) which may already vary for different environments (`production, staging, testing`) and one (optional) additional HTTP Header `x-mockturtle-state-identifier` to specify the state you want to mock.
 
 ## Available for 
 
@@ -95,7 +97,8 @@ brew install mockturtle
 ## Start the Server
 
 ```shell
-CONFIG=/path/to/your/mock-config.yml swift run Run serve --env prod --hostname 0.0.0.0 --port 80
+# in the folder where your mock-config.yml lives
+mockturtle serve
 ```
 
 ## Need Help?

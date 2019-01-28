@@ -1,0 +1,18 @@
+version: "0.1.0"
+# Result for valid login
+
+delay:
+  from: 0
+  to: 1
+
+response:
+  code: 200
+  header:
+    Content-Type: "application/json"
+  body: >
+    {
+      "user": {
+        "name": "Peter",
+        "age": 19
+      }
+    }

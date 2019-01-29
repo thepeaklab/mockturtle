@@ -1,0 +1,10 @@
+version: "0.1.0"
+# Result for empty list of users
+
+response:
+  code: 200
+  header:
+    Content-Type: "application/json"
+  body: >
+    [
+    ]

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,13 +13,42 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MockturtleExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="4qe-jk-flY">
+                                <rect key="frame" x="65" y="68" width="245" height="29"/>
+                                <segments>
+                                    <segment title="Test"/>
+                                    <segment title="Stage"/>
+                                    <segment title="Production"/>
+                                </segments>
+                                <connections>
+                                    <action selector="actionEnvironmentDidChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="AWV-Rp-9JA"/>
+                                </connections>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Vz-xu-Xo7">
+                                <rect key="frame" x="149" y="167" width="77" height="30"/>
+                                <state key="normal" title="Send Login"/>
+                                <connections>
+                                    <action selector="actionSendLoginTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="J47-7R-BcR"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="2Vz-xu-Xo7" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="3ir-61-91P"/>
+                            <constraint firstItem="4qe-jk-flY" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="9TX-NC-7ec"/>
+                            <constraint firstItem="2Vz-xu-Xo7" firstAttribute="top" secondItem="4qe-jk-flY" secondAttribute="bottom" constant="71" id="Snz-Ol-DR8"/>
+                            <constraint firstItem="4qe-jk-flY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="48" id="t0W-zw-N4a"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="segmentedControlEnvironment" destination="4qe-jk-flY" id="C4S-u6-brC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

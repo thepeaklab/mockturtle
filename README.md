@@ -16,60 +16,35 @@ The only difference between production and test code will be the `base url` of y
 - Linux
 - Docker
 
+## Homebrew
+
+```shell
+brew tap thepeaklab/tap
+brew install mockturtle
+```
+
 ## Mock Configuration File
+
+For more information about `mock-config.yml` see [Docs/mock_config.md](Docs/mock_config.md)
 
 ```yaml
 version: "0.1.0"
 routes:
-
-# basic route
-  - url: "v1/auth/login"  # defines the route
-    directory: "login"    # override the default route directory to "login" (optional)
-    method: "POST"        # defines the HTTP method (optional)
-
-# short example
-# when directory is not set: url will be the default directory (see folder structure)
-# when method is not set: all HTTP methods will be routed
-  - url: "v1/users"
-
-# short example 2
-# you don't have to define a route to mock responses
-# its also possible to just define one directory, which can be useful for generic error codes
-- directory: "global/error_codes"
+  - url: v1/auth/login
+    directory: login
+    method: POST
+  - url: v1/users
+- directory: global/error_codes
 ```
 
-### Folder Structure
+### State Configuration
 
-```
-mock-config.yml
-├── login/
-│   ├── valid.yml
-│   └── invalid.yml
-└── global/
-    └── error_codes/
-        ├── 404.yml
-        └── 500.yml
-```
-
-### State Configuration File
-
-**login/valid.yml**
+For more information about state configurations see [Docs/state_configuration.md](Docs/state_configuration.md)
 
 ```yaml
 version: "0.1.0"
 # Result for valid login
 
-# optional: you can override the state identifier
-# default value: file name without the suffix (in this example: valid)
-identifier: override_valid
-
-# optional: simulate a response delay
-# from - to will generate a random delay from 0 to 1 seconds
-delay:
-  from: 0
-  to: 1
-
-# the mock response
 response:
   code: 200
   header:
@@ -83,23 +58,17 @@ response:
     }
 ```
 
-### File Watch
-
-You can modify your `mock-config.yml` while the `Mockturtle` server is running. File changes will be recognized and the server will update instantly.
-
-## Homebrew
-
-```shell
-brew tap thepeaklab/tap
-brew install mockturtle
-```
-
-## Start the Server
+## Serve
 
 ```shell
 # in the folder where your mock-config.yml lives
-mockturtle serve
+> mockturtle serve
+Server starting on http://localhost:8080
 ```
+
+### File Watch
+
+You can modify your `mock-config.yml` while the `Mockturtle` server is running. File changes will be recognized and the server will update instantly.
 
 ## Need Help?
 

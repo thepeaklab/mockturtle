@@ -21,7 +21,7 @@ case $1 in
 		;;
 	generate)
 		shift
-		../Run generateScenarioFile $@
+		$RUNPATH/Run generateScenarioFile $@
 		break
 		;;
 	*)

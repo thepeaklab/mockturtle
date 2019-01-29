@@ -1,0 +1,5 @@
+version: "0.1.0"
+routes:
+  - path: v1/users
+    method: GET
+    state: default

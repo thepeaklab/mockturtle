@@ -11,8 +11,6 @@ response:
     Content-Type: "application/json"
   body: >
     {
-      "user": {
-        "name": "Peter",
-        "age": 19
-      }
+      "name": "Peter",
+      "age": 19
     }

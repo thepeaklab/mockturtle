@@ -6,29 +6,52 @@
 //  Copyright © 2019 the peak lab. gmbh & co. kg. All rights reserved.
 //
 
+
 import XCTest
 @testable import MockturtleExample
 
+
 class MockturtleExampleTests: XCTestCase {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+    func testAuthLoginWithDefaultSettingShouldSucceed() {
+        let client = HTTPClient()
+        client.environment = .test
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        let authLoginExpectation = expectation(description: "auth login expectation")
+        client.authLogin(username: "username", password: "password") { result in
+            XCTAssertNotNil(result)
+            XCTAssertEqual(result?.name, "Peter")
+            XCTAssertEqual(result?.age, 19)
+            authLoginExpectation.fulfill()
         }
+        waitForExpectations(timeout: 2, handler: nil)
+    }
+
+    func testUsersWithDefaultSettingsShouldReturnTwoUsers() {
+        let client = HTTPClient()
+        client.environment = .test
+
+        let usersExpectation = expectation(description: "users expectation")
+        client.users { users in
+            XCTAssertNotNil(users)
+            XCTAssertEqual(users?.count, 2)
+            usersExpectation.fulfill()
+        }
+        waitForExpectations(timeout: 2, handler: nil)
+    }
+
+    func testUsersWithEmptySettingShouldReturnNoUsers() {
+        let client = HTTPClient()
+        client.environment = .test
+        client.mockturtleScenarioAdapter?.scenarioIdentifier = "all_valid_but_empty"
+
+        let usersExpectation = expectation(description: "users expectation")
+        client.users { users in
+            XCTAssertNotNil(users)
+            XCTAssertEqual(users?.count, 0)
+            usersExpectation.fulfill()
+        }
+        waitForExpectations(timeout: 2, handler: nil)
     }
 
 }

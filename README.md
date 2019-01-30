@@ -72,7 +72,7 @@ You can modify your `mock-config.yml` while the `Mockturtle` server is running. 
 
 ## Need Help?
 
-Please [submit an issue](https://github.com/mockturtle-parser/issues) on GitHub.
+Please [submit an issue](https://github.com/mockturtle/issues) on GitHub.
 
 ## License
 

@@ -38,4 +38,32 @@ includes:
 
 ## Flat
 
-WIP
+```shell
+# cd in the directory with all your scenario files
+cd Example/macOS-iOS/Mock/scenarios
+# generate one output.json
+mockturtle generate --folder Example/ --output-file output.json
+```
+
+`mockturtle generate` will generate the following content in `output.json`, which is easy to parse in your http client, for route/state mapping (see [Docs/ios.md](ios.md)).
+
+```json
+{
+  "scenarios": {
+    "all_valid": {
+      "routes": [
+        {
+          "path": "v1/auth/login",
+          "method": "POST",
+          "state": "valid"
+        },
+        {
+          "path": "v1/users",
+          "method": "GET",
+          "state": "default"
+        }
+      ]
+    }
+  }
+}
+```

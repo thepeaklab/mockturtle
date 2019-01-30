@@ -14,9 +14,12 @@ class ViewController: UIViewController {
 
     private let httpClient = HTTPClient()
     @IBOutlet var segmentedControlEnvironment: UISegmentedControl!
+    @IBOutlet var labelResponse: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        segmentedControlEnvironment.accessibilityIdentifier = "segmentedControlEnvironment"
 
         updateSegmentedControlEnvironment()
     }
@@ -33,10 +36,10 @@ class ViewController: UIViewController {
     @IBAction func actionSendLoginTouchUpInside(_ sender: UIButton) {
         httpClient.authLogin(username: "username", password: "password") { loginResult in
             guard let loginResult = loginResult else {
-                print("Login Failed")
+                self.labelResponse.text = "Login Failed"
                 return
             }
-            print("Hello \(loginResult.name)")
+            self.labelResponse.text = "Hello \(loginResult.name)"
         }
     }
 

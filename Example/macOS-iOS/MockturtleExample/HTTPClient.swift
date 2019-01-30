@@ -9,6 +9,7 @@
 
 import Foundation
 import Alamofire
+import Mockturtle
 
 
 public class HTTPClient {
@@ -32,17 +33,26 @@ public class HTTPClient {
 
     private let sessionManager: Alamofire.SessionManager
 
-    private let mockturtleScenarioAdapter: MockturtleScenarioAdapter
+    public let mockturtleScenarioAdapter: MockturtleRequestAdapter?
 
     init() {
         self.environment = .production
 
         sessionManager = SessionManager.default
-        mockturtleScenarioAdapter = MockturtleScenarioAdapter()
+
+        // prepare adapter
+        let defaultScenario = ProcessInfo.processInfo.environment["MOCKTURTLE_SCENARIO_IDENTIFIER"] ?? "all_valid"
+        mockturtleScenarioAdapter = MockturtleRequestAdapter(defaultScenario)
         sessionManager.adapter = MasterAdapter(adapters: [mockturtleScenarioAdapter])
     }
 
-    public func authLogin(username: String, password: String, completion: @escaping (LoginResult?) -> Void) {
+    func foo() {
+        let sessionManager = SessionManager.default
+        sessionManager.adapter = MockturtleRequestAdapter("the_scenario_you_want_to_mock")
+        sessionManager.request("<your url>")
+    }
+
+    public func authLogin(username: String, password: String, completion: @escaping (LoginDTO?) -> Void) {
         let authLoginURL = environment.baseURL().appendingPathComponent("/v1/auth/login")
         let parameters = [
             "username": username,
@@ -51,11 +61,27 @@ public class HTTPClient {
         sessionManager.request(authLoginURL, method: .post, parameters: parameters).responseData { response in
             switch response.result {
             case .success(let data):
-                guard let loginResult = try? JSONDecoder().decode(LoginResult.self, from: data) else {
+                guard let loginResult = try? JSONDecoder().decode(LoginDTO.self, from: data) else {
                     completion(nil)
                     return
                 }
                 completion(loginResult)
+            case .failure:
+                completion(nil)
+            }
+        }
+    }
+
+    public func users(completion: @escaping ([UserDTO]?) -> Void) {
+        let authLoginURL = environment.baseURL().appendingPathComponent("/v1/users")
+        sessionManager.request(authLoginURL).responseData { response in
+            switch response.result {
+            case .success(let data):
+                guard let userDTOS = try? JSONDecoder().decode([UserDTO].self, from: data) else {
+                    completion(nil)
+                    return
+                }
+                completion(userDTOS)
             case .failure:
                 completion(nil)
             }
@@ -67,7 +93,7 @@ public class HTTPClient {
 
 public extension HTTPClient {
 
-    struct LoginResult: Codable {
+    struct LoginDTO: Codable {
 
         let name: String
         let age: Int
@@ -77,10 +103,13 @@ public extension HTTPClient {
 }
 
 
-public class MockturtleScenarioAdapter: RequestAdapter {
+public extension HTTPClient {
 
-    public func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
-        return urlRequest
+    struct UserDTO: Codable {
+
+        let name: String
+        let age: Int
+
     }
 
 }

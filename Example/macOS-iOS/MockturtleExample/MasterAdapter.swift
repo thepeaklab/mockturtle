@@ -15,16 +15,16 @@ import Alamofire
 // see https://stackoverflow.com/a/50970589/5283648
 public struct MasterAdapter: RequestAdapter {
 
-    public let adapters: [RequestAdapter]
+    public let adapters: [RequestAdapter?]
 
-    public init(adapters: [RequestAdapter]) {
+    public init(adapters: [RequestAdapter?]) {
         self.adapters = adapters
     }
 
     public func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
         var request = urlRequest
-        try adapters.forEach({ request = try $0.adapt(request) })
-        return urlRequest
+        try adapters.compactMap({ $0 }).forEach({ request = try $0.adapt(request) })
+        return request
     }
 
 }

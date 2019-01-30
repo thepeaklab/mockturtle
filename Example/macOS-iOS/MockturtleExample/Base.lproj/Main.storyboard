@@ -31,22 +31,33 @@
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Vz-xu-Xo7">
                                 <rect key="frame" x="149" y="167" width="77" height="30"/>
+                                <accessibility key="accessibilityConfiguration" identifier="buttonSendLogin"/>
                                 <state key="normal" title="Send Login"/>
                                 <connections>
                                     <action selector="actionSendLoginTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="J47-7R-BcR"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7yc-kH-6tp">
+                                <rect key="frame" x="166.5" y="245" width="42" height="21"/>
+                                <accessibility key="accessibilityConfiguration" identifier="labelResponse"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="2Vz-xu-Xo7" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="3ir-61-91P"/>
                             <constraint firstItem="4qe-jk-flY" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="9TX-NC-7ec"/>
+                            <constraint firstItem="7yc-kH-6tp" firstAttribute="top" secondItem="2Vz-xu-Xo7" secondAttribute="bottom" constant="48" id="CeA-h1-uoX"/>
+                            <constraint firstItem="7yc-kH-6tp" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Kz3-bA-yPo"/>
                             <constraint firstItem="2Vz-xu-Xo7" firstAttribute="top" secondItem="4qe-jk-flY" secondAttribute="bottom" constant="71" id="Snz-Ol-DR8"/>
                             <constraint firstItem="4qe-jk-flY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="48" id="t0W-zw-N4a"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="labelResponse" destination="7yc-kH-6tp" id="Mk4-hT-FMX"/>
                         <outlet property="segmentedControlEnvironment" destination="4qe-jk-flY" id="C4S-u6-brC"/>
                     </connections>
                 </viewController>

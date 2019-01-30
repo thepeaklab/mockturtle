@@ -42,8 +42,16 @@ sessionManager.request("<your url>").responseData { response in
 }
 ```
 
-## NSAppTransportSecurity
+## App Transport Security
+
+```plist
+<key>NSAppTransportSecurity</key>
+<dict>
+	<key>NSAllowsLocalNetworking</key>
+	<true/>
+</dict>
+```
 
 see [Apple Documentation - CocoaKeys](https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html)
 
-If set to `YES, allows loading of local resources without disabling ATS for the rest of your app. Default value is NO.
+If set to `YES`, allows loading of local resources without disabling ATS for the rest of your app. Default value is NO.

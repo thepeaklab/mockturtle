@@ -23,6 +23,16 @@ brew tap thepeaklab/tap
 brew install mockturtle
 ```
 
+## Docker
+
+```shell
+# generate scenario json
+docker run -i -v `pwd`:/folder -e FOLDER=/folder -e OUTPUT_FILE=/folder/output.json mockturtle:0.1.0
+
+# serve
+docker run -i -v `pwd`:/folder -e CONFIG=/folder/mock-config.yml --entrypoint="entrypoint-serve.sh" -p 8080:8080 mockturtle:0.1.0
+```
+
 ## Mock Configuration File
 
 For more information about `mock-config.yml` see [Docs/mock_config.md](Docs/mock_config.md)

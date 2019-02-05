@@ -22,7 +22,13 @@ COPY --from=builder /app/Public ./Public
 # Uncommand the next line if you are using Leaf
 #COPY --from=builder /app/Resources ./Resources
 
-COPY entrypoint-serve.sh /usr/local/bin/
-COPY entrypoint-generate-scenario-file.sh /usr/local/bin/
+COPY Scripts/entrypoint-serve.sh /usr/local/bin/
+COPY Scripts/entrypoint-generate-scenario-file.sh /usr/local/bin/
+
+ENV ENV prod
+ENV HOSTNAME 0.0.0.0
+ENV PORT 8080
+ENV FOLDER .
+ENV OUTPUT_FILE output.json
 
 ENTRYPOINT ["entrypoint-generate-scenario-file.sh"]

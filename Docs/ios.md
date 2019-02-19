@@ -10,6 +10,7 @@ You can almost let Alamofire do the job of mapping state identifiers for specifi
 ### 1. Define Scenarios + Build Output
 
 - Define your scenarios as shown in [Docs/scenarios.md](scenarios.md)
+- switch to folder containig scenarios
 - Run `mockturtle generate` to generate the `output.json`
 
 ### 2. Make Mapping Available

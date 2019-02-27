@@ -24,7 +24,7 @@ routes:
 
 ## Nested Scenarios
 
-You can nest other sceneario files, to prevent the need of always redeclaring the same routes/states, for example a valid login.
+You can nest other scenario files, to prevent the need of always redeclaring the same routes/states, for example a valid login.
 
 ```yaml
 version: "0.1.0"

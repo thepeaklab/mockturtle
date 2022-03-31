@@ -8,9 +8,7 @@
 
 import Vapor
 
-
-public func routes(_ router: Router) throws {
-
+public func routes(_ app: Application) throws {
     let responseController = try ResponseController()
 
     // register catch all route for all methods
@@ -20,7 +18,7 @@ public func routes(_ router: Router) throws {
         .PROPFIND, .CHECKOUT, .PROPPATCH, .SUBSCRIBE, .MKCALENDAR, .MKACTIVITY, .UNSUBSCRIBE, .TRACE
     ]
     for httpMethod in httpMethods {
-        router.on(httpMethod, at: PathComponent.catchall, use: responseController.dynamicResponse)
+        app.routes.on(httpMethod, PathComponent.catchall, use: responseController.dynamicResponse)
     }
 
 }

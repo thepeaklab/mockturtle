@@ -90,7 +90,7 @@ public class ConfigWatch {
 
     private func hashForFile(at url: URL) -> String? {
         guard let data = try? Data(contentsOf: url) else { return nil }
-        guard let hashData = try? SHA256.hash(data) else { return nil }
+        guard let hashData = try? SHA256.hash(data: data) else { return nil }
         return hashData.map { String(format: "%02hhx", $0) }.joined()
     }
 

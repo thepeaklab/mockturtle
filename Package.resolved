@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/thepeaklab/mockturtle-parser.git",
         "state": {
           "branch": null,
-          "revision": "ab6fc24ac3fd0fad5add0c895b4ceedbe9404f1f",
-          "version": "0.2.0"
+          "revision": "760af7ddeace62953ed62bc48d736acbf992c66a",
+          "version": "0.3.0"
         }
       },
       {
@@ -168,8 +168,8 @@
         "repositoryURL": "https://github.com/jpsim/Yams",
         "state": {
           "branch": null,
-          "revision": "26ab35f50ea891e8edefcc9d975db2f6b67e1d68",
-          "version": "1.0.1"
+          "revision": "b08dba4bcea978bf1ad37703a384097d3efce5af",
+          "version": "1.0.2"
         }
       }
     ]

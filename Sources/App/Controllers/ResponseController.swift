@@ -55,27 +55,27 @@ final class ResponseController {
         print("reload config")
     }
 
-    func dynamicResponse(_ req: Request) throws -> Future<Response> {
-        let stateIdentifier = req.http.headers["x-mockturtle-state-identifier"].first
-        guard let route = mockturtleConfig.route(for: req.http.url.path,
-                                                 method: req.http.method,
+    func dynamicResponse(_ req: Request) throws -> EventLoopFuture<Response> {
+        let stateIdentifier = req.headers["x-mockturtle-state-identifier"].first
+        guard let route = mockturtleConfig.route(for: req.url.path,
+                                                 method: req.method,
                                                  stateIdentifier: stateIdentifier)
         else {
-            throw Abort(.notFound, reason: "no route found for `\(req.http.method.string): \(req.http.url.path)`")
+            throw Abort(.notFound, reason: "no route found for `\(req.method.string): \(req.url.path)`")
         }
         guard let state = route.state(for: stateIdentifier) else {
             if let stateIdentifier = stateIdentifier {
                 throw Abort(.notFound, reason: "no state found for identifier `\(stateIdentifier)`")
             } else {
-                throw Abort(.notFound, reason: "x-mockturtle-state-identifier not set and no or too states many found for route `\(req.http.method.string): \(req.http.url.path)`")
+                throw Abort(.notFound, reason: "x-mockturtle-state-identifier not set and no or too states many found for route `\(req.method.string): \(req.url.path)`")
             }
         }
 
-        var httpResponse = HTTPResponse(status: HTTPResponseStatus(statusCode: state.response.code),
-                                        headers: HTTPHeaders(state.response.header.map{ ($0, $1) }),
-                                        body: HTTPBody(string: state.response.body ?? ""))
+        let httpResponse = Response(status: HTTPResponseStatus(statusCode: state.response.code),
+                                    headers: HTTPHeaders(state.response.header.map{ ($0, $1) }),
+                                    body: .init(string: state.response.body ?? ""))
 
-        let responsePromise = req.eventLoop.newPromise(Response.self)
+        let responsePromise = req.eventLoop.makePromise(of:Response.self)
 
         var delayInSeconds: Double = 0.0
         if let delay = state.delay {
@@ -87,8 +87,7 @@ final class ResponseController {
         }
 
         DispatchQueue.global(qos: .default).asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            let response = Response(http: httpResponse, using: req)
-            responsePromise.succeed(result: response)
+            responsePromise.succeed(httpResponse)
         }
 
         return responsePromise.futureResult

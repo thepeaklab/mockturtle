@@ -10,6 +10,7 @@ import Vapor
 
 public func configure(_ app: Application) throws {
     app.commands.use(GenerateScenarioFileCommand(), as: "generateScenarioFile")
+    try routes(app)
 }
 
 //public func configure(_ config: inout Config,

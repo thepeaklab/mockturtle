@@ -19,5 +19,5 @@ final class AppTests: XCTestCase {
     static let allTests = [
         ("testNothing", testNothing)
     ]
-    
+
 }

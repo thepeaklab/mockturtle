@@ -67,7 +67,9 @@ final class ResponseController {
             if let stateIdentifier = stateIdentifier {
                 throw Abort(.notFound, reason: "no state found for identifier `\(stateIdentifier)`")
             } else {
+                // swiftlint:disable line_length
                 throw Abort(.notFound, reason: "x-mockturtle-state-identifier not set and no or too states many found for route `\(req.method.string): \(req.url.path)`")
+                // swiftlint:enable line_lengt
             }
         }
 
@@ -75,7 +77,7 @@ final class ResponseController {
                                     headers: HTTPHeaders(state.response.header.map{ ($0, $1) }),
                                     body: .init(string: state.response.body ?? ""))
 
-        let responsePromise = req.eventLoop.makePromise(of:Response.self)
+        let responsePromise = req.eventLoop.makePromise(of: Response.self)
 
         var delayInSeconds: Double = 0.0
         if let delay = state.delay {

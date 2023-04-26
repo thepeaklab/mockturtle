@@ -8,7 +8,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-crypto", from: "2.0.5"),
-        .package(url: "https://github.com/vapor/vapor.git", from: "4.55.3"),
+        .package(url: "https://github.com/vapor/vapor.git", from: "4.76.0"),
         .package(url: "https://github.com/thepeaklab/mockturtle-parser.git", from: "0.2.0")
     ],
     targets: [
